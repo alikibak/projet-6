@@ -1,3 +1,5 @@
+let Token = sessionStorage.getItem("token");
+
 const box = document.querySelector(".gallery");
 
 const reponse = await fetch("http://localhost:5678/api/works");
@@ -36,3 +38,4 @@ export function getWorks(idWorks){
         }
 
 getWorks(0)
+

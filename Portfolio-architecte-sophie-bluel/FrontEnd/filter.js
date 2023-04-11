@@ -1,4 +1,5 @@
-import {getWorks} from "./work.js"
+import {getWorks} from "./work.js";
+
 const box = document.querySelector(".gallery");
 
 let divFilter = document.createElement('div');
