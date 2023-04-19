@@ -9,24 +9,42 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="assets/icons/fontawesome-free-6.3.0-web/css/regular.css">
+        <link rel="stylesheet" href="assets/icons/fontawesome-free-6.3.0-web/css/fontawesome.css">
+
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
-	<nav>
-		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li> <a href="./login.html"> login </a></li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
+	<div class="header_admin">
+		<div class="pop_modale_header">
+			<i class="fa-regular fa-pen-to-square"></i>
+			<p>Mode édition</p>
+		</div>
+		<button>
+			<span>publier les changements</span>
+		</button>
+	</div>
+	<div class="header">
+		<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+		<nav>
+			<ul>
+				<li>projets</li>
+				<li>contact</li>
+				<li><a id="Login" href="./login.html"> login </a></li>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</ul>
+		</nav>
+		</div>
 </header>
 <main>
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
 		</figure>
+		<div class="pop_modale_introduction">
+			<i class="fa-regular fa-pen-to-square"></i>
+			<p>modifier</p>
+		</div>
 		<article>
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
@@ -36,6 +54,40 @@
 	</section>
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
+		<div class="pop_modale_portfolio">
+			<i class="fa-regular fa-pen-to-square"></i>
+			<p>modifier</p>
+		</div>
+		<div class="modale">
+			<div class="modale_modif_content">
+				<div class="modale_modif">
+					<a href="" class="modale_exit"> <img src="./assets/icons/cross.png" alt="croix"></a>
+					<p>Galerie photo</p>
+					<div class="gallery_modale">
+					</div>
+					<div class="footer_modale">
+					<button class="button_modale" id="button_modale_modif"><span>Ajouter une photo</span></button>
+					<a class="suppr_button" href="">Supprimer la galerie</a>
+					</div>
+				</div>
+				<div class="modale_add">
+					<i> <img src="./assets/icons/Arrow_Back.png" alt="Arrow_Back"></i>
+					<a href="" class="modale_exit"> <img src="./assets/icons/cross.png" alt="croix"></a>
+					<p>Ajout photo</p>
+					<div class="form_addPhoto">
+						<form action="#" method="post">
+							<label for="image"></label>
+							<input type="file" name="file" id="file" accept="image/png, image/jpeg">
+							<label for="titre">Titre</label>
+							<input type="text" name="titre" id="titre">
+							<label for="catégorie">Catégorie</label>
+							<input type="text" name="catégorie" id="catégorie">
+							<button type="button" id="button_modale_add">Valider</button>
+						</form>
+					</div>
+				</div>	
+			</div>
+		</div>
 		<div class="gallery">
 		</div>
 	</section>
@@ -62,7 +114,7 @@
 	</nav>
 </footer>
 <script type="module" src="./work.js"></script>
-<script  type="module" src="./filter.js"></script>
-<script type="module" src="./login.js"></script>
+<script type="module" src="./filter.js"></script>
+<script type="module" src="./indexAdmin.js"></script>
 </body>
 </html>

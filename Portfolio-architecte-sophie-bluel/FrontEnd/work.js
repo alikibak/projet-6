@@ -1,41 +1,40 @@
-let Token = sessionStorage.getItem("token");
+let token = sessionStorage.getItem("token");
 
-const box = document.querySelector(".gallery");
+const worksContainer = document.querySelector(".gallery");
 
 const reponse = await fetch("http://localhost:5678/api/works");
 const data = await reponse.json();
 
-export function getWorks(idWorks){
-            if (idWorks != 0) {
-                const dataTest = data.filter(photo => photo.categoryId === idWorks)
-                dataTest.forEach(function(imageData){
-                    let figure = document.createElement("figure");
-                    let image = document.createElement("img");
-                    let caption = document.createElement("figcaption");
-                    
-                    image.src = `${imageData.imageUrl}`;
-                    caption.innerHTML = `${imageData.title}`;
+export function getWorks(idWorks) {
+	if (idWorks != 0) {
+		const dataWorks = data.filter((photo) => photo.categoryId === idWorks);
+		dataWorks.forEach(function (imageData) {
+			let figure = document.createElement("figure");
+			let image = document.createElement("img");
+			let caption = document.createElement("figcaption");
 
-                    box.appendChild(figure);
-                    figure.appendChild(image);
-                    figure.appendChild(caption);
-                })
-            } else {
-                const dataTest = data
-                dataTest.forEach(function(imageData){
-                    let figure = document.createElement("figure");
-                    let image = document.createElement("img");
-                    let caption = document.createElement("figcaption");
-                    
-                    image.src = `${imageData.imageUrl}`;
-                    caption.innerHTML = `${imageData.title}`;
+			image.src = `${imageData.imageUrl}`;
+			caption.innerHTML = `${imageData.title}`;
 
-                    box.appendChild(figure);
-                    figure.appendChild(image);
-                    figure.appendChild(caption);
-                })
-            }
-        }
+			worksContainer.appendChild(figure);
+			figure.appendChild(image);
+			figure.appendChild(caption);
+		});
+	} else {
+		const dataWorks = data;
+		dataWorks.forEach(function (imageData) {
+			let figure = document.createElement("figure");
+			let image = document.createElement("img");
+			let caption = document.createElement("figcaption");
 
-getWorks(0)
+			image.src = `${imageData.imageUrl}`;
+			caption.innerHTML = `${imageData.title}`;
 
+			worksContainer.appendChild(figure);
+			figure.appendChild(image);
+			figure.appendChild(caption);
+		});
+	}
+}
+
+getWorks(0);
