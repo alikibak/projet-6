@@ -1,9 +1,9 @@
-let token = sessionStorage.getItem("token");
-let modal = document.querySelector(".pop_modale_portfolio");
-let userId = sessionStorage.getItem("userId");
+import { responseWork } from "./work.js";
+import { dataWork } from "./work.js";
 
-const reponse = await fetch("http://localhost:5678/api/works");
-const data = await reponse.json();
+let token = sessionStorage.getItem("token");
+let modalButton = document.querySelector(".pop_modale_portfolio");
+
 
 if (token != null) {
 	document.getElementById("Login").innerHTML = "logout";
@@ -13,64 +13,64 @@ if (token != null) {
 	});
 	document.querySelector(".header_admin").style.display = "flex";
 	document.querySelector(".pop_modale_introduction").style.display = "flex";
-	modal.style.display = "flex";
+	modalButton.style.display = "flex";
 }
 
-modal.addEventListener("click", function () {
+modalButton.addEventListener("click", function () {
 	document.querySelector(".modale").style.display = "block";
+	getWorksModal();
 });
 
-const worksContainerModal = document.querySelector(".gallery_modale");
+const galleryModal = document.querySelector(".gallery_modale");
 
 function getWorksModal() {
-	data.forEach(function (imageData) {
+	dataWork.forEach(function (imageData) {
 		let figure = document.createElement("figure");
 		let image = document.createElement("img");
 		let caption = document.createElement("a");
+		let trashBinContainer = document.createElement("figure");
+		let trashbin = document.createElement("i");
+
+		trashBinContainer.className = "trashBinContainer";
+		trashbin.className = "fa-solid fa-trash-can";
 
 		image.src = `${imageData.imageUrl}`;
 		caption.innerHTML = "éditer";
 
-		worksContainerModal.appendChild(figure);
+		galleryModal.appendChild(figure);
 		figure.appendChild(image);
 		figure.appendChild(caption);
+		figure.appendChild(trashBinContainer);
+		trashBinContainer.appendChild(trashbin);
 
-
-		figure.addEventListener("click", async function () {
-			fetch(
-				`http://localhost:5678/api/works/${imageData.id}`,
-				{
-					method: "DELETE",
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			);
+		trashBinContainer.addEventListener("click", async function () {
+			fetch(`http://localhost:5678/api/works/${imageData.id}`, {
+				method: "DELETE",
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
 		});
 	});
 }
-
-getWorksModal();
 
 document
 	.getElementById("button_modale_modif")
 	.addEventListener("click", function () {
 		document.querySelector(".modale_modif").style.display = "none";
 		document.querySelector(".modale_add").style.display = "block";
+		document.querySelector(".back_modal").addEventListener("click", function () {
+			document.querySelector(".modale_modif").style.display = "block";
+			document.querySelector(".modale_add").style.display = "none";
+		})
 	});
 
-let addPhoto = document.getElementById("button_modale_add");
+let addPhotoButton = document.getElementById("button_modale_add");
 
-addPhoto.addEventListener("click", async function () {
+addPhotoButton.addEventListener("click", async function () {
 	let title = document.getElementById("titre").value;
 	let file = document.getElementById("file").files[0];
 	let categorie = document.getElementById("catégorie").value;
-
-	let works = {
-		image: file,
-		title: title,
-		category: categorie,
-	};
 
 	const formData = new FormData();
 
@@ -78,11 +78,33 @@ addPhoto.addEventListener("click", async function () {
 	formData.append("title", title);
 	formData.append("category", categorie);
 
-	let reponse = await fetch("http://localhost:5678/api/works", {
+	await fetch("http://localhost:5678/api/works", {
 		method: "POST",
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
 		body: formData,
 	});
+});
+
+function previewImage(event) 
+{
+    const reader = new FileReader();
+    reader.onload = function() {
+        const element = document.getElementById('previewImage');
+        element.src = reader.result;
+    }
+    reader.onerror = function() {
+        const element = document.getElementById('errorMsg');
+        element.value = "Couldn't load the image.";
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+const input = document.getElementById('file');
+input.addEventListener('change', (event) => {
+    previewImage(event)
+	document.querySelector(".fa-sharp").style.display = "none"
+	document.querySelector(".label_file").style.display = "none"
+	document.querySelector(".label_span").style.display = "none"
 });

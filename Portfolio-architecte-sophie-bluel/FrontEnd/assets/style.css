@@ -65,6 +65,10 @@ body {
 	color: #000000;
 }
 
+.display {
+	display: none;
+} 
+
 .header_admin{
 	display: none;
 	position: relative;
@@ -206,6 +210,7 @@ li:hover {
 }
 
 .modale_modif_content {
+	box-sizing: border-box;
     background: #FFFFFF;
     border-radius: 10px;
     background-color: #fefefe;
@@ -221,17 +226,17 @@ li:hover {
 	text-align: center;
 }
 
-.modale_exit {
-	display: flex;
+.nav_modal {
+    display: flex;
     flex-direction: row-reverse;
+    justify-content: space-between;
 }
 
 .gallery_modale {
-	width: 70%;
+	width: 75%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-column-gap: 8px;
-    grid-row-gap: 6px;
+    grid-column-gap: 7px;
 	margin: 46px auto;
 	padding-bottom: 46px;
 	border-bottom: 1px solid #B3B3B3;
@@ -239,6 +244,25 @@ li:hover {
 
 .gallery_modale img {
 	width: 100%;
+}
+
+.trashBinContainer {
+	background: #000000;
+	border-radius: 2px;
+	width: 17px;
+	height: 17px;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	position: relative;
+    bottom: 117px;
+    left: 58px;
+	cursor: pointer;
+}
+
+.trashBinContainer i {
+	color: white;
+    font-size: 8px;
 }
 
 .footer_modale {
@@ -277,6 +301,17 @@ li:hover {
 	width: 420px;
 }
 
+.label_file_container {
+	display: flex;
+	flex-direction: column;
+	background: #E8F1F7;
+	border-radius: 3px;
+	width: 420px;
+	height: 169px;	
+	align-items: center;
+    justify-content: center;
+}
+
 .form_addPhoto form {
 	text-align: left;
 	margin-top:30px;
@@ -284,12 +319,47 @@ li:hover {
 	flex-direction: column;
 }
 
-.form_addPhoto input {
+.form_addPhoto input, .form_addPhoto select {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
+
+.label_file_container label {
+	background: #CBD6DC;
+	border-radius: 50px;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 16px;
+	text-align: center;
+	color: #306685;
+	width: 173px;
+	height: 36px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	cursor: pointer;
+}
+
+.label_file_container i {
+	font-size: 58px;
+}
+
+.label_file_container span {
+	font-size: 10px;
+	color: #444444;
+}
+
+#previewImage {
+	display: block;
+	max-width: 169px;
+	margin: 0 auto;
+}
+
 .form_addPhoto label {
 	margin: 2em 0 1em 0;
 }
@@ -334,7 +404,7 @@ li:hover {
 	background-color: white;
 }
 
-.buttonfilter:focus {
+.buttonSelected{
 	color: white;
 	background-color: #1D6154;
 }

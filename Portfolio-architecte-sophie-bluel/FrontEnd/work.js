@@ -1,13 +1,11 @@
-let token = sessionStorage.getItem("token");
-
 const worksContainer = document.querySelector(".gallery");
 
-const reponse = await fetch("http://localhost:5678/api/works");
-const data = await reponse.json();
+export const responseWork = await fetch("http://localhost:5678/api/works");
+export const dataWork = await responseWork.json();
 
 export function getWorks(idWorks) {
 	if (idWorks != 0) {
-		const dataWorks = data.filter((photo) => photo.categoryId === idWorks);
+		const dataWorks = dataWork.filter((photo) => photo.categoryId === idWorks);
 		dataWorks.forEach(function (imageData) {
 			let figure = document.createElement("figure");
 			let image = document.createElement("img");
@@ -21,7 +19,7 @@ export function getWorks(idWorks) {
 			figure.appendChild(caption);
 		});
 	} else {
-		const dataWorks = data;
+		const dataWorks = dataWork;
 		dataWorks.forEach(function (imageData) {
 			let figure = document.createElement("figure");
 			let image = document.createElement("img");

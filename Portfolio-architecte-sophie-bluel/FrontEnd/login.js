@@ -1,8 +1,6 @@
-let summit = document.getElementById("summit");
+let submitButton = document.getElementById("submit");
 
-
-
-summit.addEventListener("click", async function(){
+submitButton.addEventListener("click", async function(){
     let email =   document.getElementById("email").value;
     let password =  document.getElementById("password").value;
     
@@ -11,7 +9,7 @@ summit.addEventListener("click", async function(){
         password: password
     };
 
-    let reponse = await fetch("http://localhost:5678/api/users/login", {
+    let responseLogin = await fetch("http://localhost:5678/api/users/login", {
     method: "POST",
     headers: {
     'Content-Type': "application/json"
@@ -19,16 +17,15 @@ summit.addEventListener("click", async function(){
     body: JSON.stringify(user)
     });
 
-    let result = await reponse.json();
-    if (result.userId === 1) {
+    let resultLogin = await responseLogin.json();
+    if (resultLogin.userId) {
         sessionStorage.clear();
-        sessionStorage.setItem("userId",result.userId)
-        sessionStorage.setItem("token",result.token);
+        sessionStorage.setItem("userId",resultLogin.userId)
+        sessionStorage.setItem("token",resultLogin.token);
         location.href = "./index.html";
     } else {
         sessionStorage.clear();
-        alert("casse toi de là mec");
-        location.href = "./login.html";
+        alert("Email ou mot de passe invalide");
 }
 })
 
