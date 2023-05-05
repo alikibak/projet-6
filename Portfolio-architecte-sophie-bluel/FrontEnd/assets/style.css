@@ -65,7 +65,7 @@ body {
 	color: #000000;
 }
 
-.display {
+.dont_display {
 	display: none;
 } 
 
@@ -330,12 +330,7 @@ li:hover {
 .label_file_container label {
 	background: #CBD6DC;
 	border-radius: 50px;
-	font-family: 'Work Sans';
-	font-style: normal;
 	font-weight: bold;
-	font-size: 14px;
-	line-height: 16px;
-	text-align: center;
 	color: #306685;
 	width: 173px;
 	height: 36px;
@@ -355,9 +350,7 @@ li:hover {
 }
 
 #previewImage {
-	display: block;
-	max-width: 169px;
-	margin: 0 auto;
+    display: block;
 }
 
 .form_addPhoto label {

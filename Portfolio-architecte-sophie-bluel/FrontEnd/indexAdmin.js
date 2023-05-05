@@ -1,5 +1,4 @@
-import { responseWork } from "./work.js";
-import { dataWork } from "./work.js";
+import { workData } from "./work.js";
 
 let token = sessionStorage.getItem("token");
 let modalButton = document.querySelector(".pop_modale_portfolio");
@@ -24,7 +23,7 @@ modalButton.addEventListener("click", function () {
 const galleryModal = document.querySelector(".gallery_modale");
 
 function getWorksModal() {
-	dataWork.forEach(function (imageData) {
+	workData.forEach(function (imageData) {
 		let figure = document.createElement("figure");
 		let image = document.createElement("img");
 		let caption = document.createElement("a");
@@ -43,7 +42,8 @@ function getWorksModal() {
 		figure.appendChild(trashBinContainer);
 		trashBinContainer.appendChild(trashbin);
 
-		trashBinContainer.addEventListener("click", async function () {
+		trashBinContainer.addEventListener("click", function (event) {
+			event.preventDefault();
 			fetch(`http://localhost:5678/api/works/${imageData.id}`, {
 				method: "DELETE",
 				headers: {
@@ -107,4 +107,5 @@ input.addEventListener('change', (event) => {
 	document.querySelector(".fa-sharp").style.display = "none"
 	document.querySelector(".label_file").style.display = "none"
 	document.querySelector(".label_span").style.display = "none"
+	document.querySelector("#previewImage").style.height = "169px"
 });

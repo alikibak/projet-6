@@ -1,7 +1,7 @@
 import { getWorks } from "./work.js";
 let token = sessionStorage.getItem("token");
-const reponseCategories = await fetch("http://localhost:5678/api/categories");
-const dataCategories = await reponseCategories.json();
+const categoriesResponse = await fetch("http://localhost:5678/api/categories");
+const categoriesData = await categoriesResponse.json();
 
 const galleryContainer = document.querySelector(".gallery");
 
@@ -10,20 +10,20 @@ divFilter.className = "filterContainer";
 galleryContainer.parentNode.insertBefore(divFilter, galleryContainer);
 
 if (token === null) {
-	let buttons = document.createElement("button");
+	let buttonAll = document.createElement("button");
 	let buttonText = document.createElement("p");
-	buttons.className = "buttonfilter";
-	buttons.classList.add("buttonSelected")
+	buttonAll.className = "buttonfilter";
+	buttonAll.classList.add("buttonSelected")
 
 	buttonText.innerHTML = "Tous";
-	divFilter.appendChild(buttons);
-	buttons.appendChild(buttonText);
+	divFilter.appendChild(buttonAll);
+	buttonAll.appendChild(buttonText);
 
-	buttons.addEventListener("click", function () {
+	buttonAll.addEventListener("click", function () {
 		galleryContainer.innerHTML = "";
 		getWorks(0);
 	});
-	dataCategories.forEach(function (category) {
+	categoriesData.forEach(function (category) {
 		let buttons = document.createElement("button");
 		let buttonText = document.createElement("p");
 
@@ -42,11 +42,11 @@ if (token === null) {
 	});
 }
 
-let btns = divFilter.getElementsByClassName("buttonfilter");
-for (let i = 0; i < btns.length; i++) {
-	btns[i].addEventListener("click", function () {
-		let current = document.getElementsByClassName("buttonSelected");
-		current[0].className = current[0].className.replace(" buttonSelected", "");
+let buttonSelected = divFilter.getElementsByClassName("buttonfilter");
+for (let i = 0; i < buttonSelected.length; i++) {
+	buttonSelected[i].addEventListener("click", function () {
+		let currentButton = document.getElementsByClassName("buttonSelected");
+		currentButton[0].className = currentButton[0].className.replace(" buttonSelected", "");
 		this.classList.add("buttonSelected");
 	});
 }
