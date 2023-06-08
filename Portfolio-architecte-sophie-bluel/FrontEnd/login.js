@@ -9,7 +9,7 @@ submitButton.addEventListener("click", async function(){
         password: password
     };
 
-    let responseLogin = await fetch("http://localhost:5678/api/users/login", {
+    let loginResponse = await fetch("http://localhost:5678/api/users/login", {
     method: "POST",
     headers: {
     'Content-Type': "application/json"
@@ -17,11 +17,11 @@ submitButton.addEventListener("click", async function(){
     body: JSON.stringify(user)
     });
 
-    let resultLogin = await responseLogin.json();
-    if (resultLogin.userId) {
+    let loginResult = await loginResponse.json();
+    if (loginResult.userId) {
         sessionStorage.clear();
-        sessionStorage.setItem("userId",resultLogin.userId)
-        sessionStorage.setItem("token",resultLogin.token);
+        sessionStorage.setItem("userId",loginResult.userId)
+        sessionStorage.setItem("token",loginResult.token);
         location.href = "./index.html";
     } else {
         sessionStorage.clear();
